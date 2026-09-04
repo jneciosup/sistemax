@@ -26,3 +26,8 @@ Proyecto web desarrollado en PHP y MySQL.
 
 ## Historial de Versiones
 - v1.0.0 Inicial
+
+## Tecnologias
+- PHP 7+
+- MySQL
+- Bootstrap
