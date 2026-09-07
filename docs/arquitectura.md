@@ -1,0 +1,2 @@
+# Arquitectura
+MVC Pattern
