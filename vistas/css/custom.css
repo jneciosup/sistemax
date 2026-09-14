@@ -4,3 +4,6 @@
 
 /* Contraste en tablas */
 table { border-collapse: collapse; }
+
+/* Alertas de error responsive */
+.alert { border-radius: 4px; }
