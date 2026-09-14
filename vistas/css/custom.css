@@ -1,3 +1,6 @@
 
 /* Mejora de accesibilidad en botones */
 .btn { font-weight: 500; }
+
+/* Contraste en tablas */
+table { border-collapse: collapse; }
