@@ -166,3 +166,4 @@ function activar(idcategoria)
 
 
 init();
+// Eventos adicionales de tabla
