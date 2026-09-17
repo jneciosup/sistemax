@@ -262,3 +262,4 @@ $(document).on('change', '#tipo_documento', function() {
 });
 
 init();
+// Carga diferida de permisos
