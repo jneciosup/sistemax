@@ -137,3 +137,4 @@ function eliminar(idpersona)
 }
 
 init();
+// Busqueda de DNI en tiempo real
