@@ -177,3 +177,4 @@ function imprimir()
 }
 
 init();
+// Formateo de precios
