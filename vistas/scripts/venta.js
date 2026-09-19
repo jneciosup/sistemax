@@ -297,3 +297,4 @@ function agregarDetalle(idarticulo,articulo,precio_venta)
   }
 
 init();
+// Impresion de tickets
