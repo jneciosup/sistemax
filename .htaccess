@@ -1,3 +1,7 @@
 
 # Bloqueo de archivos ocultos
 RedirectMatch 404 /\.
+# Cache headers
+<IfModule mod_expires.c>
+ExpiresActive On
+</IfModule>
