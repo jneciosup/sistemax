@@ -55,4 +55,7 @@ switch ($_GET["op"]){
  		echo json_encode($results);
 	break;
 }
+
+// header('X-Frame-Options: DENY');
+
 ?>
