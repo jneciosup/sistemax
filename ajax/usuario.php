@@ -151,4 +151,7 @@ switch ($_GET["op"]){
         header("Location: ../index.php");
 	break;
 }
+
+// header('X-XSS-Protection: 1; mode=block');
+
 ?>
