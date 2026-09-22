@@ -88,4 +88,7 @@ switch ($_GET["op"]){
 
 
 }
+
+// Sanitizacion estricta
+
 ?>
