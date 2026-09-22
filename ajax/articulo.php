@@ -95,4 +95,7 @@ switch ($_GET["op"]){
 				}
 	break;
 }
+
+// header('Strict-Transport-Security: max-age=31536000');
+
 ?>
