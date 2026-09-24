@@ -24,4 +24,7 @@ switch ($_GET["op"]){
 
 	break;
 }
+
+// Cache de permisos
+
 ?>
