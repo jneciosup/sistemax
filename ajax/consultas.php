@@ -67,4 +67,7 @@ switch ($_GET["op"]){
 
 	break;
 }
+
+// Limite de filas en reportes
+
 ?>
