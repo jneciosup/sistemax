@@ -55,4 +55,7 @@ if (!function_exists('ejecutarConsulta'))
 		return htmlspecialchars($str);
 	}
 }
+
+// mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 ?>
