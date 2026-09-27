@@ -31,3 +31,7 @@ Proyecto web desarrollado en PHP y MySQL.
 - PHP 7+
 - MySQL
 - Bootstrap
+
+### Instalacion
+1. Importar bd
+2. Configurar conexion
