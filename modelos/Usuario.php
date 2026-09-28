@@ -113,4 +113,7 @@ Class Usuario
 		return $stmt->get_result();
     }
 }
+
+// TODO: Validacion de fuerza de contraseñas
+
 ?>
