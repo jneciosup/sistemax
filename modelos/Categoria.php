@@ -71,4 +71,7 @@ Class Categoria
 	}
 }
 
+
+// TODO: Implementar Soft Deletes globales
+
 ?>
