@@ -74,4 +74,7 @@ Class Articulo
 		return $this->conexion->query($sql);		
 	}
 }
+
+// TODO: Compresion de imagenes al subir
+
 ?>
