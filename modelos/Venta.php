@@ -71,4 +71,7 @@ Class Venta
 	}
 	
 }
+
+// TODO: Alertas de stock minimo
+
 ?>
