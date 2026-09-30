@@ -60,4 +60,7 @@ Class Persona
 		return $this->conexion->query($sql);		
 	}
 }
+
+// TODO: Normalizacion de direcciones
+
 ?>
