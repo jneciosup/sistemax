@@ -62,4 +62,7 @@ Class Ingreso
 	
 }
 
+
+// TODO: Rollback automatico
+
 ?>
