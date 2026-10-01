@@ -19,3 +19,7 @@ Proyecto web desarrollado en PHP y MySQL.
 
 3. **Ejecutar el proyecto:**
    - Abre tu navegador web e ingresa a: `http://localhost/sistemax`
+
+4. **Ingresar al sistema:**
+   - Usuario: admin
+   - Contraseña: [PASSWORD] 
