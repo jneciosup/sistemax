@@ -1,0 +1,6 @@
+projectKey=ImportMotors_V2
+serverUrl=http://localhost:9000
+serverVersion=26.6.0.123539
+dashboardUrl=http://localhost:9000/dashboard?id=ImportMotors_V2
+ceTaskId=b1583e96-6dfe-4d5f-bcdd-b8c7beb54747
+ceTaskUrl=http://localhost:9000/api/ce/task?id=b1583e96-6dfe-4d5f-bcdd-b8c7beb54747
