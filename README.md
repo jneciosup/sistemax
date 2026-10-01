@@ -24,4 +24,3 @@ Proyecto web desarrollado en PHP y MySQL.
    - Usuario: admin
    - Contraseña: [PASSWORD]
    - 
-5. **Rolando Quispe de Sulca:**
