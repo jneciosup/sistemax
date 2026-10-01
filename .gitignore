@@ -2,3 +2,5 @@
 node_modules/
 vendor/
 .env
+error_log
+*.log
