@@ -22,7 +22,7 @@ if ($_SESSION['acceso']==1)
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                          <h1 class="box-title" id="tituloUsuario">Usuario <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)" aria-controls="listadoregistros formularioregistros" aria-expanded="false"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
+                          <h1 class="box-title" id="tituloUsuario">Usuarios <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)" aria-controls="listadoregistros formularioregistros" aria-expanded="false"><i class="fa fa-plus-circle"></i> Agregar</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
