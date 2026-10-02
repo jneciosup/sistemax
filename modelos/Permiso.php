@@ -20,4 +20,7 @@ Class Permiso
 
 }
 
+
+// TODO: Jerarquia de roles
+
 ?>
