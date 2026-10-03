@@ -47,4 +47,7 @@ Class Consultas
 	}
 }
 
+
+// TODO: Graficos asincronos
+
 ?>
