@@ -1,0 +1,3 @@
+
+# Bloqueo de archivos ocultos
+RedirectMatch 404 /\.
