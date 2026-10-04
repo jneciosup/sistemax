@@ -23,3 +23,6 @@ Proyecto web desarrollado en PHP y MySQL.
 4. **Ingresar al sistema:**
    - Usuario: admin
    - Contraseña: [PASSWORD] 
+
+## Historial de Versiones
+- v1.0.0 Inicial
