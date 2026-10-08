@@ -1,100 +1,112 @@
 <?php 
-//Incluímos inicialmente la conexión a la base de datos
-require "../config/Conexion.php";
+require_once "../config/Conexion.php";
 
 Class Usuario
 {
-	//Implementamos nuestro constructor
-	public function __construct()
-	{
+	private $conexion;
 
+	public function __construct($conexionDB = null)
+	{
+		global $conexion;
+		$this->conexion = $conexionDB ?? $conexion;
 	}
 
-	//Implementamos un método para insertar registros
 	public function insertar($nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email,$cargo,$login,$clave,$imagen,$permisos)
 	{
-		$sql="INSERT INTO usuario (nombre,tipo_documento,num_documento,direccion,telefono,email,cargo,login,clave,imagen,condicion)
-		VALUES ('$nombre','$tipo_documento','$num_documento','$direccion','$telefono','$email','$cargo','$login','$clave','$imagen','1')";
-		//return ejecutarConsulta($sql);
-		$idusuarionew=ejecutarConsulta_retornarID($sql);
+		$sql="INSERT INTO usuario (nombre,tipo_documento,num_documento,direccion,telefono,email,cargo,login,clave,imagen,condicion) VALUES (?,?,?,?,?,?,?,?,?,?,'1')";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("ssssssssss", $nombre, $tipo_documento, $num_documento, $direccion, $telefono, $email, $cargo, $login, $clave, $imagen);
+		$stmt->execute();
+		$idusuarionew = $stmt->insert_id;
 
 		$num_elementos=0;
 		$sw=true;
 
 		while ($num_elementos < count($permisos))
 		{
-			$sql_detalle = "INSERT INTO usuario_permiso(idusuario, idpermiso) VALUES('$idusuarionew', '$permisos[$num_elementos]')";
-			ejecutarConsulta($sql_detalle) or $sw = false;
+			$sql_detalle = "INSERT INTO usuario_permiso(idusuario, idpermiso) VALUES(?, ?)";
+			$stmt_detalle = $this->conexion->prepare($sql_detalle);
+			$stmt_detalle->bind_param("ii", $idusuarionew, $permisos[$num_elementos]);
+			$stmt_detalle->execute() or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}
-
 		return $sw;
 	}
 
-	//Implementamos un método para editar registros
 	public function editar($idusuario,$nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email,$cargo,$login,$clave,$imagen,$permisos)
 	{
-		$sql="UPDATE usuario SET nombre='$nombre',tipo_documento='$tipo_documento',num_documento='$num_documento',direccion='$direccion',telefono='$telefono',email='$email',cargo='$cargo',login='$login',clave='$clave',imagen='$imagen' WHERE idusuario='$idusuario'";
-		ejecutarConsulta($sql);
+		$sql="UPDATE usuario SET nombre=?,tipo_documento=?,num_documento=?,direccion=?,telefono=?,email=?,cargo=?,login=?,clave=?,imagen=? WHERE idusuario=?";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("ssssssssssi", $nombre, $tipo_documento, $num_documento, $direccion, $telefono, $email, $cargo, $login, $clave, $imagen, $idusuario);
+		$stmt->execute();
 
-		//Eliminamos todos los permisos asignados para volverlos a registrar
-		$sqldel="DELETE FROM usuario_permiso WHERE idusuario='$idusuario'";
-		ejecutarConsulta($sqldel);
+		$sqldel="DELETE FROM usuario_permiso WHERE idusuario=?";
+		$stmtdel = $this->conexion->prepare($sqldel);
+		$stmtdel->bind_param("i", $idusuario);
+		$stmtdel->execute();
 
 		$num_elementos=0;
 		$sw=true;
 
 		while ($num_elementos < count($permisos))
 		{
-			$sql_detalle = "INSERT INTO usuario_permiso(idusuario, idpermiso) VALUES('$idusuario', '$permisos[$num_elementos]')";
-			ejecutarConsulta($sql_detalle) or $sw = false;
+			$sql_detalle = "INSERT INTO usuario_permiso(idusuario, idpermiso) VALUES(?, ?)";
+			$stmt_detalle = $this->conexion->prepare($sql_detalle);
+			$stmt_detalle->bind_param("ii", $idusuario, $permisos[$num_elementos]);
+			$stmt_detalle->execute() or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}
-
 		return $sw;
-
 	}
 
-	//Implementamos un método para desactivar categorías
 	public function desactivar($idusuario)
 	{
-		$sql="UPDATE usuario SET condicion='0' WHERE idusuario='$idusuario'";
-		return ejecutarConsulta($sql);
+		$sql="UPDATE usuario SET condicion='0' WHERE idusuario=?";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("i", $idusuario);
+		return $stmt->execute();
 	}
 
-	//Implementamos un método para activar categorías
 	public function activar($idusuario)
 	{
-		$sql="UPDATE usuario SET condicion='1' WHERE idusuario='$idusuario'";
-		return ejecutarConsulta($sql);
+		$sql="UPDATE usuario SET condicion='1' WHERE idusuario=?";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("i", $idusuario);
+		return $stmt->execute();
 	}
 
-	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idusuario)
 	{
-		$sql="SELECT * FROM usuario WHERE idusuario='$idusuario'";
-		return ejecutarConsultaSimpleFila($sql);
+		$sql="SELECT * FROM usuario WHERE idusuario=?";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("i", $idusuario);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		return $result->fetch_assoc();
 	}
 
-	//Implementar un método para listar los registros
 	public function listar()
 	{
 		$sql="SELECT * FROM usuario";
-		return ejecutarConsulta($sql);		
+		return $this->conexion->query($sql);		
 	}
-	//Implementar un método para listar los permisos marcados
+
 	public function listarmarcados($idusuario)
 	{
-		$sql="SELECT * FROM usuario_permiso WHERE idusuario='$idusuario'";
-		return ejecutarConsulta($sql);
+		$sql="SELECT * FROM usuario_permiso WHERE idusuario=?";
+		$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("i", $idusuario);
+		$stmt->execute();
+		return $stmt->get_result();
 	}
 
-	//Función para verificar el acceso al sistema
 	public function verificar($login,$clave)
     {
-    	$sql="SELECT idusuario,nombre,tipo_documento,num_documento,telefono,email,cargo,imagen,login FROM usuario WHERE login='$login' AND clave='$clave' AND condicion='1'"; 
-    	return ejecutarConsulta($sql);  
+    	$sql="SELECT idusuario,nombre,tipo_documento,num_documento,telefono,email,cargo,imagen,login FROM usuario WHERE login=? AND clave=? AND condicion='1'"; 
+    	$stmt = $this->conexion->prepare($sql);
+		$stmt->bind_param("ss", $login, $clave);
+		$stmt->execute();
+		return $stmt->get_result();
     }
 }
-
 ?>

@@ -13,7 +13,13 @@ function init(){
 	$("#imagenmuestra").hide();
 	//Mostramos los permisos
 	$.post("../ajax/usuario.php?op=permisos&id=",function(r){
-	        $("#permisos").html(r);
+		var data = JSON.parse(r);
+		var html = '';
+		data.forEach(function(p) {
+			var checked = p.marcado ? 'checked' : '';
+			html += '<li> <input type="checkbox" '+checked+' name="permiso[]" value="'+p.idpermiso+'">'+p.nombre+'</li>';
+		});
+		$("#permisos").html(html);
 	});
 }
 
@@ -84,6 +90,39 @@ function listar()
 						console.log(e.responseText);	
 					}
 				},
+		"columns": [
+			{ 
+				"data": null, 
+				"render": function (data, type, row) {
+					var id = row.idusuario;
+					if (row.condicion == 1) {
+						return '<button class="btn btn-warning" onclick="mostrar('+id+')"><i class="fa fa-pencil"></i></button> ' +
+							   '<button class="btn btn-danger" onclick="desactivar('+id+')"><i class="fa fa-close"></i></button>';
+					} else {
+						return '<button class="btn btn-warning" onclick="mostrar('+id+')"><i class="fa fa-pencil"></i></button> ' +
+							   '<button class="btn btn-primary" onclick="activar('+id+')"><i class="fa fa-check"></i></button>';
+					}
+				}
+			},
+			{ "data": "nombre" },
+			{ "data": "tipo_documento" },
+			{ "data": "num_documento" },
+			{ "data": "telefono" },
+			{ "data": "email" },
+			{ "data": "login" },
+			{ 
+				"data": "imagen",
+				"render": function(data) {
+					return "<img src='../files/usuarios/"+data+"' height='50px' width='50px' >";
+				}
+			},
+			{ 
+				"data": "condicion",
+				"render": function (data, type, row) {
+					return (data == 1) ? '<span class="label bg-green">Activado</span>' : '<span class="label bg-red">Desactivado</span>';
+				}
+			}
+		],
 		"bDestroy": true,
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
@@ -155,7 +194,13 @@ function mostrar(idusuario)
 
  	});
  	$.post("../ajax/usuario.php?op=permisos&id="+idusuario,function(r){
-	        $("#permisos").html(r);
+		var data = JSON.parse(r);
+		var html = '';
+		data.forEach(function(p) {
+			var checked = p.marcado ? 'checked' : '';
+			html += '<li> <input type="checkbox" '+checked+' name="permiso[]" value="'+p.idpermiso+'">'+p.nombre+'</li>';
+		});
+		$("#permisos").html(html);
 	});
 }
 

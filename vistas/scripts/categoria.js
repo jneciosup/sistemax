@@ -68,6 +68,29 @@ function listar()
 						console.log(e.responseText);	
 					}
 				},
+		"columns": [
+			{ 
+				"data": null, 
+				"render": function (data, type, row) {
+					var id = row.idcategoria;
+					if (row.condicion == 1) {
+						return '<button class="btn btn-warning" onclick="mostrar('+id+')"><i class="fa fa-pencil"></i></button> ' +
+							   '<button class="btn btn-danger" onclick="desactivar('+id+')"><i class="fa fa-close"></i></button>';
+					} else {
+						return '<button class="btn btn-warning" onclick="mostrar('+id+')"><i class="fa fa-pencil"></i></button> ' +
+							   '<button class="btn btn-primary" onclick="activar('+id+')"><i class="fa fa-check"></i></button>';
+					}
+				}
+			},
+			{ "data": "nombre" },
+			{ "data": "descripcion" },
+			{ 
+				"data": "condicion",
+				"render": function (data, type, row) {
+					return (data == 1) ? '<span class="label bg-green">Activado</span>' : '<span class="label bg-red">Desactivado</span>';
+				}
+			}
+		],
 		"bDestroy": true,
 		"iDisplayLength": 5,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
