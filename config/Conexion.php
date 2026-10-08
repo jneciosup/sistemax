@@ -1,17 +1,28 @@
 <?php 
 require_once "global.php";
 
-$conexion = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
+class Database {
+    private static $instancia = null;
+    private $conexion;
 
-// Forma segura de fijar el charset, sin concatenar SQL manualmente
-$conexion->set_charset(DB_ENCODE);
+    private function __construct() {
+        $this->conexion = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
+        $this->conexion->set_charset(DB_ENCODE);
+        if (mysqli_connect_errno()) {
+            printf("Falló conexión a la base de datos: %s\n", mysqli_connect_error());
+            exit();
+        }
+    }
 
-//Si tenemos un posible error en la conexión lo mostramos
-if (mysqli_connect_errno())
-{
-	printf("Falló conexión a la base de datos: %s\n",mysqli_connect_error());
-	exit();
+    public static function getConexion() {
+        if (self::$instancia == null) {
+            self::$instancia = new Database();
+        }
+        return self::$instancia->conexion;
+    }
 }
+
+$conexion = Database::getConexion();
 
 if (!function_exists('ejecutarConsulta'))
 {
