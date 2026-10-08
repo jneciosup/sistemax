@@ -2,6 +2,10 @@
 //Incluímos inicialmente la conexión a la base de datos
 require "../config/Conexion.php";
 
+/**
+ * Clase Categoria
+ * Gestiona el mantenimiento de categorías en la base de datos
+ */
 Class Categoria
 {
 	private $conexion;
