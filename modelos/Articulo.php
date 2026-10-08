@@ -1,6 +1,10 @@
 <?php 
 require_once "../config/Conexion.php";
 
+/**
+ * Clase Articulo
+ * Gestiona el inventario y detalles de los artículos
+ */
 Class Articulo
 {
 	private $conexion;
