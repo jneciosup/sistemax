@@ -1,6 +1,10 @@
 <?php 
 require_once "../config/Conexion.php";
 
+/**
+ * Clase Persona
+ * Gestiona los datos de clientes y proveedores
+ */
 Class Persona
 {
 	private $conexion;
