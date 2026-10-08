@@ -1,8 +1,13 @@
 <?php
+
+// Inicia o reanuda la sesión del usuario para gestionar datos globales ($_SESSION)
 session_start(); 
+
+// Importa el modelo Usuario que contiene las consultas SQL a la base de datos
 require_once "../config/Conexion.php";
 require_once "../modelos/Usuario.php";
 
+// Instancia el objeto de la clase Usuario
 $usuario=new Usuario($conexion);
 
 // Recepción y desinfección de variables enviadas por método POST.
