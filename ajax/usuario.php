@@ -5,6 +5,8 @@ require_once "../modelos/Usuario.php";
 
 $usuario=new Usuario($conexion);
 
+// Recepción y desinfección de variables enviadas por método POST.
+// Si existen en $_POST, se limpian los caracteres especiales con la función limpiarCadena(); de lo contrario, quedan vacías.
 $idusuario=isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]):"";
 $nombre=isset($_POST["nombre"])? limpiarCadena($_POST["nombre"]):"";
 $tipo_documento=isset($_POST["tipo_documento"])? limpiarCadena($_POST["tipo_documento"]):"";
@@ -17,6 +19,7 @@ $login=isset($_POST["login"])? limpiarCadena($_POST["login"]):"";
 $clave=isset($_POST["clave"])? limpiarCadena($_POST["clave"]):"";
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 
+// Evalúa la acción a realizar según el parámetro 'op' enviado por URL (método GET)
 switch ($_GET["op"]){
 	case 'guardaryeditar':
 		if (!file_exists($_FILES['imagen']['tmp_name']) || !is_uploaded_file($_FILES['imagen']['tmp_name']))
