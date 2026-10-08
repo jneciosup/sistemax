@@ -1,7 +1,8 @@
-<?php 
+<?php
+require_once "../config/Conexion.php";
 require_once "../modelos/Articulo.php";
 
-$articulo=new Articulo();
+$articulo=new Articulo($conexion);
 
 $idarticulo=isset($_POST["idarticulo"])? limpiarCadena($_POST["idarticulo"]):"";
 $idcategoria=isset($_POST["idcategoria"])? limpiarCadena($_POST["idcategoria"]):"";

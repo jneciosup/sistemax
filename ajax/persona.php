@@ -1,7 +1,8 @@
-<?php 
+<?php
+require_once "../config/Conexion.php";
 require_once "../modelos/Persona.php";
 
-$persona=new Persona();
+$persona=new Persona($conexion);
 
 $idpersona=isset($_POST["idpersona"])? limpiarCadena($_POST["idpersona"]):"";
 $tipo_persona=isset($_POST["tipo_persona"])? limpiarCadena($_POST["tipo_persona"]):"";
