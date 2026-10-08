@@ -1,6 +1,10 @@
 <?php 
 require_once "../config/Conexion.php";
 
+/**
+ * Clase Usuario
+ * Gestiona los accesos, roles y datos de los usuarios del sistema
+ */
 Class Usuario
 {
 	private $conexion;
